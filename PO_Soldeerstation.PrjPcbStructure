@@ -1,0 +1,6 @@
+Record=TopLevelDocument|FileName=Display.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Display.SchDoc|FileName=Led.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=Display.SchDoc|FileName=MainIC.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Display.SchDoc|FileName=Regelaar.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Display.SchDoc|FileName=Versterker.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=Display.SchDoc|FileName=Voeding.SchDoc|SheetNumber=4
