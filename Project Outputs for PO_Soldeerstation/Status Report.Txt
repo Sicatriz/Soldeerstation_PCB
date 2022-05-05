@@ -1,0 +1,22 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Project [PO_Soldeerstation.PrjPcb]
+   Generated File[NewPrintMainV3_Copper_Signal_Top.gbr]
+   Generated File[NewPrintMainV3_Copper_Signal_Bot.gbr]
+   Generated File[NewPrintMainV3_Legend_Top.gbr]
+   Generated File[NewPrintMainV3_Legend_Bot.gbr]
+   Generated File[NewPrintMainV3_Soldermask_Top.gbr]
+   Generated File[NewPrintMainV3_Soldermask_Bot.gbr]
+   Generated File[NewPrintMainV3_Paste_Top.gbr]
+   Generated File[NewPrintMainV3_Paste_Bot.gbr]
+   Generated File[NewPrintMainV3_Profile.gbr]
+   Generated File[NewPrintMainV3_NPTH_Drill.gbr]
+   Generated File[NewPrintMainV3_PTH_Drill.gbr]
+   Generated File[NewPrintMainV3.EXTREP]
+   Generated File[NewPrintMainV3.REP]
+
+
+Files Generated   : 13
+Documents Printed : 0
+
+Finished Output Generation At 12:26:57 On 29/04/2022

@@ -1,0 +1,719 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">25/03/2022</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">15:52:45</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc" class="file"><acronym title="D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc">D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">113</td></tr>
+</table>
+</td>
+</table><a name="ID4GJBE1RGOFHQOBNXCEHCXECIBDJYKPNHZHR5VNECHT50PGHDWZK"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDT5ME2DQAW5DBMDHL20DGLSFSTIGLVND3OVV03FBIV1NMHRYKJ4FM">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBP0MZMQCNUKJEKYANOCIKCT2FVE3CCOO4JP2LPEWKFUMBYPU1CI">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKLEZT142TEUKBCB14BURPKX2WQRMALXAGUYPUP5YRT3ZUB1ORY">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSBVPWJXJFJJRJLRTOBMZHW4OVNQA4KDLJC3PPBBBVNVNVKINE0CK">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID41Y21IA5JAHIDZ1AZOCZL0ZJZ54OSKU0SDYA1GTTMCGXFTCIQ2B">Width Constraint (Min=10mil) (Max=10mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCX0S0VEXKVBVGL3WWTB5EVH5WDRXQIQ5AXXAKRJGIWGQQZ0NMN2F">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0H14Y4ULKHFDELLLEYMOLM442LOELBA4DYG42DRQT3M0WXWLJVE">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDR2VWZS5Y5B1HLTJDAA1WTMIQ0PJVKEIKJ2DYZJHEY0AF4TTOYZNJ">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIYBAYF42FEVNFWRIULNALEYUBLWVDIRW3JGCRWG5UEJR55NXU4PJ">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">10</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID54XYYLCRCCVZGAXR0I2YQEYGBJBHJ53M40ACHKJRCKV3G0JXC2XD">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">24</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTUWQU4HRUADGBQMT34G0ZEBM1LDKOABDSEMWIZEUVQ4QXTX1QQCD">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDF1ORC232TG53B4MM35NDYPXIPHXZKHDCHBDFVZFDS1AWBWJIDKNM">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJD3YE4UHXK1KK3ISUI5D045R5KCUTHFH2OGGGZPNW0IK3JC03SNI">Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker'))</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVAZ2MLMOH5YECMA4RXFLQAY2UPIALWISTCHYWHIZH0YXQWYNPTBH">Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding'))</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLZJ0ETZTXA1ZE1V31GV5SD2ZBNXPL1F1UEF3NDK4PGV3BRJUML0L">Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar'))</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJKXYTYJU45HBGAI3M3GBZQWRBFMZ3RF2RMKITLCUHD1XBRHP3GYL">Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC'))</a></td>
+<td class="column2">23</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWOMHOAZED33DI5MXJCKODYWHPQQAOONRTDLF2N4MIMIK5UKVBSG">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">113</td>
+</tr>
+</table><br><a name="IDT5ME2DQAW5DBMDHL20DGLSFSTIGLVND3OVV03FBIV1NMHRYKJ4FM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=1642.052mil|Location2.Y=1653.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=1642.052mil|Location2.Y=1653.302mil|Absolute=True">Clearance Constraint: (7.835mil &lt; 10mil) Between Pad R15-1(3597.874mil,1690mil) on Top Layer And Pad R15-2(3642.126mil,1690mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2044.375mil|Location2.X=2055.625mil|Location1.Y=1322.052mil|Location2.Y=1333.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2044.375mil|Location2.X=2055.625mil|Location1.Y=1322.052mil|Location2.Y=1333.302mil|Absolute=True">Clearance Constraint: (7.835mil &lt; 10mil) Between Pad R18-1(2027.874mil,1370mil) on Top Layer And Pad R18-2(2072.126mil,1370mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.375mil|Location2.X=3465.625mil|Location1.Y=1642.052mil|Location2.Y=1653.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.375mil|Location2.X=3465.625mil|Location1.Y=1642.052mil|Location2.Y=1653.302mil|Absolute=True">Clearance Constraint: (7.835mil &lt; 10mil) Between Pad R8-1(3437.874mil,1690mil) on Top Layer And Pad R8-2(3482.126mil,1690mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0H14Y4ULKHFDELLLEYMOLM442LOELBA4DYG42DRQT3M0WXWLJVE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1116.375mil|Location2.X=1243.625mil|Location1.Y=4756.375mil|Location2.Y=4883.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1116.375mil|Location2.X=1243.625mil|Location1.Y=4756.375mil|Location2.Y=4883.625mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-16(1180mil,4820mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.375mil|Location2.X=3983.625mil|Location1.Y=4756.375mil|Location2.Y=4883.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.375mil|Location2.X=3983.625mil|Location1.Y=4756.375mil|Location2.Y=4883.625mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-17(3920mil,4820mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1116.375mil|Location2.X=1243.625mil|Location1.Y=1116.375mil|Location2.Y=1243.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1116.375mil|Location2.X=1243.625mil|Location1.Y=1116.375mil|Location2.Y=1243.625mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-18(1180mil,1180mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.375mil|Location2.X=3983.625mil|Location1.Y=1116.375mil|Location2.Y=1243.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.375mil|Location2.X=3983.625mil|Location1.Y=1116.375mil|Location2.Y=1243.625mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-19(3920mil,1180mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDIYBAYF42FEVNFWRIULNALEYUBLWVDIRW3JGCRWG5UEJR55NXU4PJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.319mil|Location2.X=2118.569mil|Location1.Y=3551.227mil|Location2.Y=3562.477mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2107.319mil|Location2.X=2118.569mil|Location1.Y=3551.227mil|Location2.Y=3562.477mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.646mil &lt; 10mil) Between Pad BR1-2(2060mil,3550mil) on Multi-Layer And Via (2145mil,3561mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.646mil] / [Bottom Solder] Mask Sliver [6.646mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2322.863mil|Location2.X=2334.113mil|Location1.Y=1812.205mil|Location2.Y=1823.455mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2322.863mil|Location2.X=2334.113mil|Location1.Y=1812.205mil|Location2.Y=1823.455mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.193mil &lt; 10mil) Between Pad D3-1(2300mil,1789.37mil) on Multi-Layer And Via (2351mil,1840mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.193mil] / [Bottom Solder] Mask Sliver [5.193mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3010.976mil|Location2.X=3022.226mil|Location1.Y=2462.535mil|Location2.Y=2473.785mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3010.976mil|Location2.X=3022.226mil|Location1.Y=2462.535mil|Location2.Y=2473.785mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.114mil &lt; 10mil) Between Pad IC3-15(3020mil,2440mil) on Multi-Layer And Via (3013mil,2498mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.114mil] / [Bottom Solder] Mask Sliver [2.114mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3601.919mil|Location2.X=3613.169mil|Location1.Y=1427.065mil|Location2.Y=1438.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3601.919mil|Location2.X=3613.169mil|Location1.Y=1427.065mil|Location2.Y=1438.315mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.538mil &lt; 10mil) Between Pad K8-2(3590mil,1390mil) on Multi-Layer And Via (3620mil,1463mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.538mil] / [Bottom Solder] Mask Sliver [7.538mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2398.11mil|Location2.X=2409.36mil|Location1.Y=2093.259mil|Location2.Y=2104.509mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2398.11mil|Location2.X=2409.36mil|Location1.Y=2093.259mil|Location2.Y=2104.509mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.537mil &lt; 10mil) Between Pad R10-1(2426.142mil,2065.682mil) on Top Layer And Via (2380mil,2120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.537mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1649.375mil|Location2.X=1660.625mil|Location1.Y=1408.147mil|Location2.Y=1419.397mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1649.375mil|Location2.X=1660.625mil|Location1.Y=1408.147mil|Location2.Y=1419.397mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.457mil &lt; 10mil) Between Pad R12-1(1662.598mil,1380mil) on Top Layer And Via (1655mil,1444mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.457mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.505mil|Location2.X=3671.755mil|Location1.Y=1733.649mil|Location2.Y=1744.899mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660.505mil|Location2.X=3671.755mil|Location1.Y=1733.649mil|Location2.Y=1744.899mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.909mil &lt; 10mil) Between Pad R15-2(3642.126mil,1690mil) on Top Layer And Via (3683mil,1767mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.909mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.233mil|Location2.X=3949.483mil|Location1.Y=1801.194mil|Location2.Y=1812.444mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3938.233mil|Location2.X=3949.483mil|Location1.Y=1801.194mil|Location2.Y=1812.444mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.638mil &lt; 10mil) Between Pad R22-2(3943.858mil,1840mil) on Top Layer And Via (3943.858mil,1776mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.638mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3250.694mil|Location2.X=3261.944mil|Location1.Y=1800.254mil|Location2.Y=1811.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3250.694mil|Location2.X=3261.944mil|Location1.Y=1800.254mil|Location2.Y=1811.504mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.509mil &lt; 10mil) Between Pad R4-1(3280.63mil,1840mil) on Top Layer And Via (3234mil,1784mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.509mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2869.375mil|Location2.X=2880.625mil|Location1.Y=1679.147mil|Location2.Y=1690.397mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2869.375mil|Location2.X=2880.625mil|Location1.Y=1679.147mil|Location2.Y=1690.397mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.457mil &lt; 10mil) Between Pad R5-1(2860.63mil,1650mil) on Top Layer And Via (2875mil,1716mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.457mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID54XYYLCRCCVZGAXR0I2YQEYGBJBHJ53M40ACHKJRCKV3G0JXC2XD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2008.312mil|Location2.X=2019.562mil|Location1.Y=3201.461mil|Location2.Y=3212.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2008.312mil|Location2.X=2019.562mil|Location1.Y=3201.461mil|Location2.Y=3212.711mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.15mil &lt; 10mil) Between Pad BR1-1(2060mil,3254.724mil) on Multi-Layer And Track (1930.078mil,3201.574mil)(2060mil,3201.574mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2054.375mil|Location2.X=2065.625mil|Location1.Y=4182.574mil|Location2.Y=4193.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2054.375mil|Location2.X=2065.625mil|Location1.Y=4182.574mil|Location2.Y=4193.824mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.127mil &lt; 10mil) Between Pad BR1-4(2060mil,4140.552mil) on Multi-Layer And Track (1930.078mil,4193.7mil)(2119.056mil,4193.7mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.127mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1758.312mil|Location2.X=1769.562mil|Location1.Y=3201.461mil|Location2.Y=3212.711mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1758.312mil|Location2.X=1769.562mil|Location1.Y=3201.461mil|Location2.Y=3212.711mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.15mil &lt; 10mil) Between Pad BR2-1(1810mil,3254.724mil) on Multi-Layer And Track (1680.078mil,3201.574mil)(1810mil,3201.574mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.15mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1804.375mil|Location2.X=1815.625mil|Location1.Y=4182.574mil|Location2.Y=4193.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1804.375mil|Location2.X=1815.625mil|Location1.Y=4182.574mil|Location2.Y=4193.824mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.127mil &lt; 10mil) Between Pad BR2-4(1810mil,4140.552mil) on Multi-Layer And Track (1680.078mil,4193.7mil)(1869.056mil,4193.7mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.127mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2546.659mil|Location2.X=2557.909mil|Location1.Y=4844.375mil|Location2.Y=4855.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2546.659mil|Location2.X=2557.909mil|Location1.Y=4844.375mil|Location2.Y=4855.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.843mil &lt; 10mil) Between Pad D1-1(2514.882mil,4850mil) on Multi-Layer And Track (2561.142mil,4850mil)(2699.922mil,4850mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.843mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.966mil|Location2.X=3038.216mil|Location1.Y=4844.375mil|Location2.Y=4855.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3026.966mil|Location2.X=3038.216mil|Location1.Y=4844.375mil|Location2.Y=4855.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.828mil &lt; 10mil) Between Pad D1-2(3070mil,4850mil) on Multi-Layer And Track (2884.96mil,4850mil)(3023.74mil,4850mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.828mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2441.304mil|Location2.X=2452.554mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2441.304mil|Location2.X=2452.554mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.843mil &lt; 10mil) Between Pad D2-1(2419.37mil,3210mil) on Multi-Layer And Track (2455.788mil,3210mil)(2566.024mil,3210mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.843mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.81mil|Location2.X=2858.06mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.81mil|Location2.X=2858.06mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.833mil &lt; 10mil) Between Pad D2-2(2880mil,3210mil) on Multi-Layer And Track (2733.346mil,3210mil)(2843.582mil,3210mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.833mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1811.304mil|Location2.Y=1822.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1811.304mil|Location2.Y=1822.554mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.843mil &lt; 10mil) Between Pad D3-1(2300mil,1789.37mil) on Multi-Layer And Track (2300mil,1825.788mil)(2300mil,1936.024mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.843mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=2216.81mil|Location2.Y=2228.06mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=2216.81mil|Location2.Y=2228.06mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.833mil &lt; 10mil) Between Pad D3-2(2300mil,2250mil) on Multi-Layer And Track (2300mil,2103.346mil)(2300mil,2213.582mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.833mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.426mil|Location2.X=1495.676mil|Location1.Y=1608.636mil|Location2.Y=1619.886mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.426mil|Location2.X=1495.676mil|Location1.Y=1608.636mil|Location2.Y=1619.886mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.714mil &lt; 10mil) Between Pad L1-1(1499.448mil,1644.252mil) on Multi-Layer And Track (1487.638mil,1545.826mil)(1487.638mil,1606.85mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.714mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.426mil|Location2.X=1495.676mil|Location1.Y=1668.618mil|Location2.Y=1679.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.426mil|Location2.X=1495.676mil|Location1.Y=1668.618mil|Location2.Y=1679.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.714mil &lt; 10mil) Between Pad L1-1(1499.448mil,1644.252mil) on Multi-Layer And Track (1487.638mil,1681.654mil)(1487.638mil,2274.174mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.714mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1684.324mil|Location2.X=1695.574mil|Location1.Y=2140.132mil|Location2.Y=2151.382mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1684.324mil|Location2.X=1695.574mil|Location1.Y=2140.132mil|Location2.Y=2151.382mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.714mil &lt; 10mil) Between Pad L1-2(1680.552mil,2175.748mil) on Multi-Layer And Track (1692.362mil,1545.826mil)(1692.362mil,2138.346mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.714mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1684.324mil|Location2.X=1695.574mil|Location1.Y=2200.114mil|Location2.Y=2211.364mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1684.324mil|Location2.X=1695.574mil|Location1.Y=2200.114mil|Location2.Y=2211.364mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.714mil &lt; 10mil) Between Pad L1-2(1680.552mil,2175.748mil) on Multi-Layer And Track (1692.362mil,2213.15mil)(1692.362mil,2274.174mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.714mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.536mil|Location2.X=2874.786mil|Location1.Y=1807.236mil|Location2.Y=1818.486mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.536mil|Location2.X=2874.786mil|Location1.Y=1807.236mil|Location2.Y=1818.486mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R2-1(2850.708mil,1850mil) on Top Layer And Track (2847.362mil,1808.07mil)(2969.41mil,1808.07mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.536mil|Location2.X=2874.786mil|Location1.Y=1881.514mil|Location2.Y=1892.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.536mil|Location2.X=2874.786mil|Location1.Y=1881.514mil|Location2.Y=1892.764mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R2-1(2850.708mil,1850mil) on Top Layer And Track (2847.362mil,1891.93mil)(2969.41mil,1891.93mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.478mil|Location2.X=2958.728mil|Location1.Y=1807.237mil|Location2.Y=1818.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.478mil|Location2.X=2958.728mil|Location1.Y=1807.237mil|Location2.Y=1818.487mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R2-2(2969.016mil,1850mil) on Top Layer And Track (2847.362mil,1808.07mil)(2969.41mil,1808.07mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.478mil|Location2.X=2958.728mil|Location1.Y=1881.513mil|Location2.Y=1892.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.478mil|Location2.X=2958.728mil|Location1.Y=1881.513mil|Location2.Y=1892.763mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R2-2(2969.016mil,1850mil) on Top Layer And Track (2847.362mil,1891.93mil)(2969.41mil,1891.93mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2445.15mil|Location2.X=2456.4mil|Location1.Y=2217.236mil|Location2.Y=2228.486mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2445.15mil|Location2.X=2456.4mil|Location1.Y=2217.236mil|Location2.Y=2228.486mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R9-1(2432.322mil,2260mil) on Top Layer And Track (2428.976mil,2218.07mil)(2551.024mil,2218.07mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2445.15mil|Location2.X=2456.4mil|Location1.Y=2291.514mil|Location2.Y=2302.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2445.15mil|Location2.X=2456.4mil|Location1.Y=2291.514mil|Location2.Y=2302.764mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R9-1(2432.322mil,2260mil) on Top Layer And Track (2428.976mil,2301.93mil)(2551.024mil,2301.93mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.092mil|Location2.X=2540.342mil|Location1.Y=2217.237mil|Location2.Y=2228.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.092mil|Location2.X=2540.342mil|Location1.Y=2217.237mil|Location2.Y=2228.487mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R9-2(2550.63mil,2260mil) on Top Layer And Track (2428.976mil,2218.07mil)(2551.024mil,2218.07mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.092mil|Location2.X=2540.342mil|Location1.Y=2291.513mil|Location2.Y=2302.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.092mil|Location2.X=2540.342mil|Location1.Y=2291.513mil|Location2.Y=2302.763mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.583mil &lt; 10mil) Between Pad R9-2(2550.63mil,2260mil) on Top Layer And Track (2428.976mil,2301.93mil)(2551.024mil,2301.93mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.583mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1514.375mil|Location2.X=1525.625mil|Location1.Y=4355.723mil|Location2.Y=4366.973mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1514.375mil|Location2.X=1525.625mil|Location1.Y=4355.723mil|Location2.Y=4366.973mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.282mil &lt; 10mil) Between Pad RE1-4(1520mil,4316.85mil) on Multi-Layer And Track (1122.362mil,4368.426mil)(1622.362mil,4368.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.282mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1219.099mil|Location2.X=1230.349mil|Location1.Y=4355.723mil|Location2.Y=4366.973mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1219.099mil|Location2.X=1230.349mil|Location1.Y=4355.723mil|Location2.Y=4366.973mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.282mil &lt; 10mil) Between Pad RE1-5(1224.724mil,4316.85mil) on Multi-Layer And Track (1122.362mil,4368.426mil)(1622.362mil,4368.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.282mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDTUWQU4HRUADGBQMT34G0ZEBM1LDKOABDSEMWIZEUVQ4QXTX1QQCD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.756mil|Location2.X=1538.423mil|Location1.Y=3176.147mil|Location2.Y=3183.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1530.756mil|Location2.X=1538.423mil|Location1.Y=3176.147mil|Location2.Y=3183.814mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Arc (1539.528mil,3179.567mil) on Top Overlay And Text "IC3" (1522mil,3120mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2679.267mil|Location2.X=2690.517mil|Location1.Y=4494.369mil|Location2.Y=4505.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2679.267mil|Location2.X=2690.517mil|Location1.Y=4494.369mil|Location2.Y=4505.619mil|Absolute=True">Silk To Silk Clearance Constraint: (5.374mil &lt; 10mil) Between Arc (2570mil,4500mil) on Top Overlay And Text "+" (2690.079mil,4480.315mil) on Top Overlay Silk Text to Silk Clearance [5.374mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3093.686mil|Location2.X=3104.936mil|Location1.Y=3784.365mil|Location2.Y=3795.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3093.686mil|Location2.X=3104.936mil|Location1.Y=3784.365mil|Location2.Y=3795.615mil|Absolute=True">Silk To Silk Clearance Constraint: (4.921mil &lt; 10mil) Between Arc (2650mil,3790mil) on Top Overlay And Text "+" (3104.724mil,3760.472mil) on Top Overlay Silk Text to Silk Clearance [4.921mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3189.04mil|Location2.X=3200.29mil|Location1.Y=4474.366mil|Location2.Y=4485.616mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3189.04mil|Location2.X=3200.29mil|Location1.Y=4474.366mil|Location2.Y=4485.616mil|Absolute=True">Silk To Silk Clearance Constraint: (4.921mil &lt; 10mil) Between Arc (2981.575mil,4480mil) on Top Overlay And Text "+" (3200.079mil,4450.472mil) on Top Overlay Silk Text to Silk Clearance [4.921mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3015.771mil|Location2.X=3027.021mil|Location1.Y=4684.899mil|Location2.Y=4696.149mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3015.771mil|Location2.X=3027.021mil|Location1.Y=4684.899mil|Location2.Y=4696.149mil|Absolute=True">Silk To Silk Clearance Constraint: (7.254mil &lt; 10mil) Between Arc (2981.575mil,4480mil) on Top Overlay And Text "D1" (3023mil,4699mil) on Top Overlay Silk Text to Silk Clearance [7.254mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.267mil|Location2.X=3440.517mil|Location1.Y=4064.369mil|Location2.Y=4075.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.267mil|Location2.X=3440.517mil|Location1.Y=4064.369mil|Location2.Y=4075.619mil|Absolute=True">Silk To Silk Clearance Constraint: (5.374mil &lt; 10mil) Between Arc (3320mil,4070mil) on Top Overlay And Text "+" (3440.079mil,4050.315mil) on Top Overlay Silk Text to Silk Clearance [5.374mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3749.267mil|Location2.X=3760.517mil|Location1.Y=4064.369mil|Location2.Y=4075.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3749.267mil|Location2.X=3760.517mil|Location1.Y=4064.369mil|Location2.Y=4075.619mil|Absolute=True">Silk To Silk Clearance Constraint: (5.374mil &lt; 10mil) Between Arc (3640mil,4070mil) on Top Overlay And Text "+" (3760.079mil,4050.315mil) on Top Overlay Silk Text to Silk Clearance [5.374mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2800.365mil|Location2.X=2811.615mil|Location1.Y=4789.767mil|Location2.Y=4801.017mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2800.365mil|Location2.X=2811.615mil|Location1.Y=4789.767mil|Location2.Y=4801.017mil|Absolute=True">Silk To Silk Clearance Constraint: (8.822mil &lt; 10mil) Between Text "C4" (2776mil,4726mil) on Top Overlay And Track (2699.922mil,4803.74mil)(2884.96mil,4803.74mil) on Top Overlay Silk Text to Silk Clearance [8.822mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJD3YE4UHXK1KK3ISUI5D045R5KCUTHFH2OGGGZPNW0IK3JC03SNI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.174mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4896.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.174mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4896.142mil|Absolute=True">Room Definition: Between DIP Component IC2-MCP6002-I_P (3520mil,4700mil) on Top Layer And Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.874mil|Location2.X=9575mil|Location1.Y=3952.874mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.874mil|Location2.X=9575mil|Location1.Y=3952.874mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And Small Component C2-10µF (3640mil,4070mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2681.694mil|Location2.X=9575mil|Location1.Y=1000.354mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2681.694mil|Location2.X=9575mil|Location1.Y=1000.354mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And Small Component K3-2 pin (2850mil,1390mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component C12-10nF (3440mil,4350mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=3874.568mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=3874.568mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component C13-10nF (3890mil,3910mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4071.234mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4071.234mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component C3-100nF (3890mil,4106.667mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component C6-10nF (3890mil,4500mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.024mil|Location2.X=9575mil|Location1.Y=4095mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component C7-10nF (3890mil,4303.333mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.086mil|Location2.X=9575mil|Location1.Y=1339.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.086mil|Location2.X=9575mil|Location1.Y=1339.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R11-18k (1530mil,1380mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.086mil|Location2.X=9575mil|Location1.Y=1799.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.086mil|Location2.X=9575mil|Location1.Y=1799.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R1-18k (2670mil,1840mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1632.086mil|Location2.X=9575mil|Location1.Y=1339.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1632.086mil|Location2.X=9575mil|Location1.Y=1339.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R12-18k (1700mil,1380mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.102mil|Location2.X=9575mil|Location1.Y=1589.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.102mil|Location2.X=9575mil|Location1.Y=1589.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R13-5k6 (3910mil,1630mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.102mil|Location2.X=9575mil|Location1.Y=1369.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3841.102mil|Location2.X=9575mil|Location1.Y=1369.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R14-5k6 (3910mil,1410mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.82mil|Location2.X=9575mil|Location1.Y=1635.866mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.82mil|Location2.X=9575mil|Location1.Y=1635.866mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R15-100 (3620mil,1690mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2818.426mil|Location2.X=9575mil|Location1.Y=1804.134mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2818.426mil|Location2.X=9575mil|Location1.Y=1804.134mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R2-1M (2908.386mil,1850mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3251.102mil|Location2.X=9575mil|Location1.Y=1799.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3251.102mil|Location2.X=9575mil|Location1.Y=1799.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R4-5k6 (3320mil,1840mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2831.102mil|Location2.X=9575mil|Location1.Y=1609.646mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2831.102mil|Location2.X=9575mil|Location1.Y=1609.646mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R5-5k6 (2900mil,1650mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.82mil|Location2.X=9575mil|Location1.Y=1635.866mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.82mil|Location2.X=9575mil|Location1.Y=1635.866mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R8-100 (3460mil,1690mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2400.04mil|Location2.X=9575mil|Location1.Y=2214.134mil|Location2.Y=4800mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2400.04mil|Location2.X=9575mil|Location1.Y=2214.134mil|Location2.Y=4800mil|Absolute=True">Room Definition: Between Room Versterker (Bounding Region = (5045mil, 4095mil, 9575mil, 4800mil) (InComponentClass('Versterker')) And SMT Small Component R9-10M (2490mil,2260mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDVAZ2MLMOH5YECMA4RXFLQAY2UPIALWISTCHYWHIZH0YXQWYNPTBH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3166.738mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3166.738mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between DIP Component RE1-RT424005 (1372.362mil,3319.213mil) on Top Layer And Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3190.748mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3190.748mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And SIP Component BR1-KBJ608G (2060mil,3254.724mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3190.748mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3190.748mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And SIP Component BR2-KBJ608G (1810mil,3254.724mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3338.228mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3338.228mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component C1-4700µF (2650mil,3790mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4264.449mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4264.449mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component C4-100µF (2981.575mil,4480mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4382.874mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4382.874mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component C5-10µF (2570mil,4500mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4788.976mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4788.976mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component D1-1N4007-B (2514.882mil,4850mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3158.82mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=3158.82mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component D2-1N5231B (2419.37mil,3210mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4409.212mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4409.212mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component K1-2 pin (2240mil,4610mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4409.212mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4409.212mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And Small Component K2-2 pin (1710mil,4610mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=1797.76mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=1797.76mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And SMT Small Component R3-65k (3102.677mil,1838.114mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4499.646mil|Location2.Y=6295mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=775mil|Location2.X=5505mil|Location1.Y=4499.646mil|Location2.Y=6295mil|Absolute=True">Room Definition: Between Room Voeding (Bounding Region = (775mil, 4975mil, 5505mil, 6295mil) (InComponentClass('Voeding')) And SMT Small Component R6-10k (1200mil,4540mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDLZJ0ETZTXA1ZE1V31GV5SD2ZBNXPL1F1UEF3NDK4PGV3BRJUML0L"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=3010.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=3010.472mil|Absolute=True">Room Definition: Between Component L2-10A (3861.968mil,2895.118mil) on Top Layer And Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1590.788mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1590.788mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And Small Component K8-2 pin (3390mil,1390mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2215.434mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1595.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2215.434mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1595.63mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And Small Component T2-NPN BC547CTFR (2394.567mil,1483.032mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1331.694mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1279.684mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1331.694mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1279.684mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And Small Component T3-IRF9Z34NPBF (1650mil,1210mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2210.865mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1292.599mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2210.865mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1292.599mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And Small Component T4-NPN BC547CTFR (2390mil,1180mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1805.434mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1295.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1805.434mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1295.63mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And Small Component T5-BC557ATA (1984.567mil,1183.032mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1713.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1713.858mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And SMT Small Component R17-4k7 (2460mil,1679.409mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1998.82mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1424.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1998.82mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=1424.134mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And SMT Small Component R18-100 (2050mil,1370mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=2284.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2516.968mil|Location2.X=5216.968mil|Location1.Y=226.929mil|Location2.Y=2284.448mil|Absolute=True">Room Definition: Between Room Regelaar (Bounding Region = (2516.968mil, 226.929mil, 5216.968mil, 931.929mil) (InComponentClass('Regelaar')) And SMT Small Component R20-4k7 (3910mil,2250mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJKXYTYJU45HBGAI3M3GBZQWRBFMZ3RF2RMKITLCUHD1XBRHP3GYL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1511.694mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1511.694mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between DIP Component IC3-ATMEGA4809-PF (2570mil,2743.74mil) on Top Layer And Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3395mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3395mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3835mil|Absolute=True">Room Definition: Between DIP Component K11-6pin (3570mil,3660mil) on Top Layer And Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1770mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1770mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between DIP Component K12-10 pin (1920mil,1720mil) on Top Layer And Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3179.568mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3822.638mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3179.568mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3822.638mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SIP Component K6-4 pin (3240mil,3450mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2605mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2605mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SIP Component K9-5 pin (2780mil,2120mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3202.874mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=4187.126mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3202.874mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=4187.126mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component C10-10µF (3320mil,4070mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2248.82mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2248.82mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component D3-1N4148 (2300mil,1789.37mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component K10-3 pin (1260mil,2850mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component K4-3 pin (1260mil,2260mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.095mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.095mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component K5-2 pin (3532.205mil,2060mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1105.472mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component K7-3 pin (1260mil,1650mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1463.032mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1463.032mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component L1-10uH, 2.5A (1590mil,1910mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3605.434mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3365.631mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3605.434mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3365.631mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And Small Component T1-NPN BC547CTFR (3784.567mil,3253.032mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3406.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3406.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component C11-100nF (3470mil,3200mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=4385.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3606.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=4385.432mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component C14-100nF (3670mil,4350mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component C8-100nF (3020mil,3200mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.024mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component C9-100nF (3245mil,3200mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R10-4k7 (2460mil,2065.682mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2402.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R16-4k7 (2460mil,1872.546mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3662.086mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3662.086mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R19-10k (3730mil,2320mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R21-4k7 (3910mil,2040mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.914mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R22-4k7 (3910mil,1840mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.086mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.086mil|Location2.X=11955mil|Location1.Y=1060mil|Location2.Y=3290mil|Absolute=True">Room Definition: Between Room MainIC (Bounding Region = (5045mil, 1060mil, 11955mil, 3290mil) (InComponentClass('MainIC')) And SMT Small Component R7-10k (3120mil,1650mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDWOMHOAZED33DI5MXJCKODYWHPQQAOONRTDLF2N4MIMIK5UKVBSG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2649mil|Location2.X=2651mil|Location1.Y=3789mil|Location2.Y=3791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\PXL\ALTIUM_PCB_DESIGN\1_EAIC\PO_Soldeerstation\NewPrintMain.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2649mil|Location2.X=2651mil|Location1.Y=3789mil|Location2.Y=3791mil|Absolute=True">Height Constraint: Small Component C1-4700µF (2650mil,3790mil) on Top Layer Actual Height = 1626.378mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
